@@ -15,7 +15,7 @@ import lombok.ToString;
  * Representa un producto disponible en el sistema.
  * 
  * Esta clase almacena la información relacionada con un producto, incluyendo
- * su id, nombre, precios de compra y venta, stock disponible, descripción y 
+ * su id, nombre, precios de compra y venta, stock disponible, descripción, categoria y 
  * el id del proveedor asociado. Puede utilizarse para gestionar inventarios,
  * registrar compras o ventas y realizar consultas sobre productos.
  */
@@ -28,3 +28,4 @@ public class Producto {
     private String descripcion;
     private int idProveedor;
 }
+
