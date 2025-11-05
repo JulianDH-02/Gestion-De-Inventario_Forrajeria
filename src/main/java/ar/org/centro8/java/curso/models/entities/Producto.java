@@ -26,6 +26,8 @@ public class Producto {
     private int precioCompra;
     private int stock;
     private String descripcion;
+    private String categoria;
     private int idProveedor;
 }
+
 
