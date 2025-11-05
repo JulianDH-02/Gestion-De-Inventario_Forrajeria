@@ -23,7 +23,7 @@ GROUP BY pr.nombre;
 -- Busca productos por categoría 
 
 SELECT * FROM productos
-WHERE categoria LIKE '%Alimento%';
+WHERE categoria = "Alimento";
 
 -- Muestra el stock por categoria
 
@@ -37,4 +37,5 @@ SELECT c.nombre, c.apellido, SUM(v.precio_total_venta) AS total_gastado
 FROM ventas v
 JOIN clientes c ON v.id_cliente = c.id
 GROUP BY c.id;
+
 
