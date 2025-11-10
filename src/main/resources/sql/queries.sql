@@ -2,7 +2,8 @@
 
 SELECT v.id AS id_venta, c.nombre, c.apellido, v.precio_total_venta, v.fecha_venta
 FROM ventas v
-JOIN clientes c ON v.id_cliente = c.id;
+JOIN clientes c ON v.id_cliente = c.id
+ORDER BY v.id;
 
 -- Muestra detalle completo de cada venta
 
@@ -23,7 +24,7 @@ GROUP BY pr.nombre;
 -- Busca productos por categoría 
 
 SELECT * FROM productos
-WHERE categoria = "Alimento";
+WHERE categoria LIKE '%Alimento%';
 
 -- Muestra el stock por categoria
 
@@ -37,5 +38,4 @@ SELECT c.nombre, c.apellido, SUM(v.precio_total_venta) AS total_gastado
 FROM ventas v
 JOIN clientes c ON v.id_cliente = c.id
 GROUP BY c.id;
-
 

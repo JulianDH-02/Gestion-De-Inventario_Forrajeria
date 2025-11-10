@@ -2,7 +2,8 @@
 
 SELECT v.id AS id_venta, c.nombre, c.apellido, v.precio_total_venta, v.fecha_venta
 FROM ventas v
-JOIN clientes c ON v.id_cliente = c.id;
+JOIN clientes c ON v.id_cliente = c.id
+ORDER BY v.id;
 
 -- Muestra detalle completo de cada venta
 

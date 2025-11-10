@@ -1,11 +1,11 @@
-INSERT INTO proveedores (nombre, telefono, email, observaciones) VALUES
-('AgroCampo', '1122334455', 'contacto@agrocampo.com', 'Proveedor de granos y balanceado'),
-('PetDistribuidora', '1133445566', 'ventas@petdistribuidora.com', 'Accesorios y juguetes para mascotas'),
-('NutriVet', '1144556677', 'info@nutrivet.com', 'Alimentos balanceados premium'),
-('CampoFértil', '1155667788', 'ventas@campoferil.com', 'Forrajes y semillas naturales'),
-('VetLine', '1166778899', 'contacto@vetline.com', 'Medicamentos y suplementos veterinarios'),
-('EcoPet', '1177889900', 'info@ecopet.com', 'Productos ecológicos e higiene animal'),
-('AgroAndes', '1188990011', 'contacto@agroandes.com', 'Distribuidor regional de granos y pasturas');
+INSERT INTO proveedores (nombre, telefono, email) VALUES
+('AgroCampo', '1122334455', 'contacto@agrocampo.com'),
+('PetDistribuidora', '1133445566', 'ventas@petdistribuidora.com'),
+('NutriVet', '1144556677', 'info@nutrivet.com'),
+('CampoFértil', '1155667788', 'ventas@campoferil.com'),
+('VetLine', '1166778899', 'contacto@vetline.com'),
+('EcoPet', '1177889900', 'info@ecopet.com'),
+('AgroAndes', '1188990011', 'contacto@agroandes.com');
 
 INSERT INTO clientes (nombre, apellido, dni, domicilio, telefono) VALUES
 ('Juan', 'Pérez', '40893123', 'Av. Mitre 101', '1123456789'),

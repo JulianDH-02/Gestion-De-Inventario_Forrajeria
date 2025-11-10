@@ -11,8 +11,8 @@ CREATE TABLE proveedores (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(20) NOT NULL,
     telefono VARCHAR(10) NOT NULL,
-    email VARCHAR(20) NOT NULL,
-    observaciones VARCHAR(30) NOT NULL
+    email VARCHAR(50) NOT NULL,
+    observaciones VARCHAR(200)
 );
 
 CREATE TABLE clientes (
@@ -60,5 +60,6 @@ CREATE TABLE ventas_detalle (
     REFERENCES ventas(id),
     CONSTRAINT fk_ventas_detalle_producto
     FOREIGN KEY (id_producto)
-    REFERENCES productos(id)
+    REFERENCES productos(id),
+    PRIMARY KEY (id_venta,id_producto)
 );
