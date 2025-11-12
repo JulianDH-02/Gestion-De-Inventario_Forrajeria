@@ -22,9 +22,11 @@ public class VentaRepository implements IVentaRepository {
 
     private static final String SQL_CREATE = "INSERT INTO ventas (id_cliente, precio_total_venta, fecha_venta) VALUES (?,?,?)";
     private static final String SQL_FIND_BY_ID = "SELECT * FROM ventas WHERE id=?";
+    private static final String SQL_FIND_BY_ID_CLIENTE = "SELECT * FROM ventas WHERE id_cliente=?";
     private static final String SQL_FIND_ALL = "SELECT * FROM ventas";
     private static final String SQL_DELETE = "DELETE FROM ventas WHERE id=?";
     private static final String SQL_UPDATE = "UPDATE ventas SET id_cliente=?, precio_total_venta=?, fecha_venta=? WHERE id=?";
+   
 
     public VentaRepository(DataSource dataSource){
         this.dataSource = dataSource;
@@ -57,9 +59,19 @@ public class VentaRepository implements IVentaRepository {
             } 
         }return null;
     }
-    
-    
-
+    @Override
+    public List<Venta> findByIdCliente(int idCliente) throws SQLException {
+        List<Venta> ventas = new ArrayList<>();
+        try (Connection  conn= dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_ID_CLIENTE)) {
+            ps.setInt(1, idCliente);
+            try (ResultSet rs = ps.executeQuery()) { 
+                while(rs.next()){
+                    ventas.add(mapRow(rs));
+                }
+            } 
+        }return ventas;
+    }
     @Override
     public List<Venta> findAll() throws SQLException {
         List<Venta> ventas = new ArrayList<>();

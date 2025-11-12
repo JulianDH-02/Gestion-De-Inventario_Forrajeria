@@ -20,6 +20,13 @@ public interface IVentaRepository {
      */
     public Venta findById(int id) throws SQLException;
     /**
+     * Busca una venta por su idCliente dentro de la base de datos
+     * @param idCliente -> id de un cliente de una Venta a buscar
+     * @return -> Devuelve una lista de Ventas encontrada
+     * @throws SQLException
+     */
+    public List<Venta> findByIdCliente(int idCliente) throws SQLException;
+    /**
      * Llama a todos los registros de ventas que haya en la base de datos
      * @return -> Devuelve una lista con todos las ventas encontradas
      * @throws SQLException
@@ -27,14 +34,14 @@ public interface IVentaRepository {
     public List<Venta> findAll() throws SQLException;
     /**
      * Elimina una venta por su id dentro de la base de datos
-     * @param id -> id de venta a eliminar
+     * @param id -> objeto de venta que se va eliminar
      * @return -> Devuelve 1 si hubo cambios, si no 0
      * @throws SQLException
      */
     public int delete(int id) throws SQLException;
     /**
-     * Elimina una venta por su id dentro de la base de datos
-     * @param id -> id de venta a eliminar
+     * Actualiza una venta por su id dentro de la base de datos
+     * @param venta -> objeto venta que se va actualizar
      * @return -> Devuelve 1 si hubo cambios, si no 0
      * @throws SQLException
      */

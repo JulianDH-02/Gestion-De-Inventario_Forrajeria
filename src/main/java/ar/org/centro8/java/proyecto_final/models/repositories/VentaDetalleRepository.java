@@ -21,6 +21,8 @@ public class VentaDetalleRepository implements IVentaDetalleRepository {
 
     private static final String SQL_CREATE = "INSERT INTO ventas_detalle (id_venta, id_producto, cantidad, precio_total) VALUES (?,?,?,?)";
     private static final String SQL_FIND_BY_ID_VENTA_AND_ID_PRODUCTO = "SELECT * FROM ventas_detalle WHERE id_venta=? AND id_producto=?";
+    private static final String SQL_FIND_BY_ID_VENTA = "SELECT * FROM ventas_detalle WHERE id_venta=?";
+    private static final String SQL_FIND_BY_ID_PRODUCTO = "SELECT * FROM ventas_detalle WHERE id_producto=?";
     private static final String SQL_FIND_ALL = "SELECT * FROM ventas_detalle";
     private static final String SQL_DELETE = "DELETE FROM ventas_detalle WHERE id_venta=? AND id_producto=?";
     private static final String SQL_UPDATE = "UPDATE ventas_detalle SET cantidad=?,precio_total=? WHERE id_venta=? AND id_producto=?";
@@ -42,15 +44,42 @@ public class VentaDetalleRepository implements IVentaDetalleRepository {
         }
 
     @Override
-    public VentaDetalle findByIdVentaAndIdProducto(int id_venta,int id_producto) throws SQLException {
+    public VentaDetalle findByIdVentaAndIdProducto(int idVenta,int idProducto) throws SQLException {
         try (Connection  conn= dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_ID_VENTA_AND_ID_PRODUCTO)) {
-            ps.setInt(1, id_venta);
-            ps.setInt(2, id_producto);
+            ps.setInt(1, idVenta);
+            ps.setInt(2, idProducto);
             try (ResultSet rs = ps.executeQuery()) { 
                 if(rs.next()) return mapRow(rs);
             } 
         }return null;
+    }
+    @Override
+    public List<VentaDetalle> findByIdVenta(int idVenta) throws SQLException {
+        List<VentaDetalle> ventasDetalles = new ArrayList<>();
+        try (Connection  conn= dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_ID_VENTA)) {
+            ps.setInt(1, idVenta);
+            try (ResultSet rs = ps.executeQuery()) { 
+                if(rs.next()) {
+                    ventasDetalles.add(mapRow(rs));
+                }
+            } 
+        }return ventasDetalles;
+    }
+
+    @Override
+    public List<VentaDetalle> findByIdProducto(int idProducto) throws SQLException {
+        List<VentaDetalle> ventasDetalles = new ArrayList<>();
+        try (Connection  conn= dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_ID_PRODUCTO)) {
+            ps.setInt(1, idProducto);
+            try (ResultSet rs = ps.executeQuery()) { 
+                while(rs.next()) {
+                    ventasDetalles.add(mapRow(rs));
+                }
+            } 
+        }return ventasDetalles;
     }
     
     @Override
@@ -67,11 +96,11 @@ public class VentaDetalleRepository implements IVentaDetalleRepository {
     
 
     @Override
-    public int delete(int id_venta, int id_producto) throws SQLException {
+    public int delete(int idVenta, int idProducto) throws SQLException {
         try (Connection conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(SQL_DELETE)) {
-            ps.setInt(1, id_venta);
-            ps.setInt(2, id_producto);
+            ps.setInt(1, idVenta);
+            ps.setInt(2, idProducto);
             int filaAfectada = ps.executeUpdate();            
             return filaAfectada;
         } 
@@ -99,5 +128,7 @@ public class VentaDetalleRepository implements IVentaDetalleRepository {
         vd.setPrecioTotal(rs.getInt("precio_total"));
         return vd;
     }
+
+    
 
 }

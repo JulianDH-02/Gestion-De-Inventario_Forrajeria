@@ -60,7 +60,7 @@ public class TestRepositories {
             clienteEncontrado.setApellido("Sanchez");
             int filasAfectadas = clienteRepository.update(clienteEncontrado);
             if(filasAfectadas == 1){
-                System.out.println("\nCliente con id" + clienteEncontrado.getId() + "actualizado con exito! ");
+                System.out.println("\nCliente con id " + clienteEncontrado.getId() + " actualizado con exito! ");
                 System.out.println("\n" + clienteEncontrado);
             } else System.err.println("ERROR: no se pudo actualizar el cliente");
 
@@ -69,7 +69,7 @@ public class TestRepositories {
             clientes = clienteRepository.findAll();
             if(!clientes.isEmpty()){
                 System.out.println("\nClientes encontrados: " + clientes.size());
-                System.out.println(clientes);
+                clientes.forEach(System.out::println);
             } else System.err.println("ERROR: no se encontraron clientes");
 
             //------------------------------- PROVEEDOR -------------------------------
@@ -105,7 +105,7 @@ public class TestRepositories {
             proveedores = proveedorRepository.findAll();
             if(!proveedores.isEmpty()){
                 System.out.println("\nproveedores encontrados: " + proveedores.size());
-                System.out.println(proveedores);
+                proveedores.forEach(System.out::println);
             } else System.err.println("ERROR: no se encontraron proveedores");
             
             //------------------------------ PRODUCTO ---------------------------------
@@ -125,7 +125,24 @@ public class TestRepositories {
             Producto productoEncontrado = productoRepository.findById(producto1.getId());
             if(productoEncontrado != null) System.out.println("\nProducto encontrado: " + productoEncontrado);
             else System.err.println("ERROR: no se encontro ningun producto");
-            
+
+            System.out.println("\n>>> Buscando productos por idProveedor");
+            List<Producto> productosEncontrados = new ArrayList<>();
+            productosEncontrados = productoRepository.findByIdProveedor(producto1.getIdProveedor());
+
+            if(!productosEncontrados.isEmpty()){
+                System.out.println("productos encontrados: " + productosEncontrados.size());
+                productosEncontrados.forEach(System.out::println);
+            } else  System.err.println("ERROR: no se encontraron productos");
+
+            System.out.println("\n>>> Buscando productos por categoria");
+
+            productosEncontrados = productoRepository.findByCategoria(producto1.getCategoria());
+
+            if(!productosEncontrados.isEmpty()){
+                System.out.println("productos encontrados: " + productosEncontrados.size());
+                productosEncontrados.forEach(System.out::println);
+            } else  System.err.println("ERROR: no se encontraron productos");
 
             System.out.println("\n>>> Actualizando producto");
 
@@ -133,7 +150,7 @@ public class TestRepositories {
             productoEncontrado.setPrecioVenta(4500);
             filasAfectadas = productoRepository.update(productoEncontrado);
             if(filasAfectadas == 1){
-                System.out.println("\nProducto con id " + productoEncontrado.getId() + "actualizado con exito! ");
+                System.out.println("\nProducto con id: " + productoEncontrado.getId() + " actualizado con exito! ");
                 System.out.println(productoEncontrado);
             } else System.err.println("ERROR: no se pudo actualizar el producto");
             
@@ -144,7 +161,7 @@ public class TestRepositories {
             productos = productoRepository.findAll();
             if (!productos.isEmpty()) {
                 System.out.println("\nproductos encontrados: " + productos.size());
-                System.out.println(productos);
+                productos.forEach(System.out::println);
             } else System.err.println("ERROR: no se encontraron productos");
 
             
@@ -165,13 +182,22 @@ public class TestRepositories {
             if(ventaEncontrada != null) System.out.println("\nVenta encontrada: " + ventaEncontrada);
             else System.err.println("ERROR: no se encontro ninguna venta");
 
+            System.out.println("\n>>> Buscando ventas por idCliente");
+
+            List<Venta> ventasEncontradas = new ArrayList<>();
+            ventasEncontradas = ventaRepository.findByIdCliente(venta1.getIdCliente());
+
+            if(!ventasEncontradas.isEmpty()){
+                System.out.println("ventas encontradas: " + ventasEncontradas.size());
+            } else System.err.println("ERROR: no se encontraron ventas");
+
             System.out.println("\n>>> Actualizando Venta");
 
             ventaEncontrada.setIdCliente(2);
             ventaEncontrada.setPrecioTotalVenta(20*productoEncontrado.getPrecioVenta());
             filasAfectadas = ventaRepository.update(ventaEncontrada);
             if (filasAfectadas == 1) {
-                System.out.println("\nVenta con id " + ventaEncontrada.getId() + " actualizada con exito!");
+                System.out.println("\nVenta con id: " + ventaEncontrada.getId() + " actualizada con exito!");
                 System.out.println(ventaEncontrada);
             } else System.out.println("ERROR: no se pudo actualizar la venta");
 
@@ -181,7 +207,7 @@ public class TestRepositories {
             ventas = ventaRepository.findAll();
             if(!ventas.isEmpty()){
                 System.out.println("\nventas encontradas: " + ventas.size());
-                System.out.println(ventas);
+                ventas.forEach(System.out::println);
             } else System.out.println("\nERROR: no se encontraron ventas");
 
             //--------------------------- VENTA DETALLE -------------------------------
@@ -197,16 +223,33 @@ public class TestRepositories {
             .anyMatch(p -> p.getId() == ventaDetalle1.getIdProducto());
 
             if(existeIdVenta && existeIdProducto){
-                System.out.println("\nVenta detallada creada con id_venta : " + ventaDetalle1.getIdVenta() + "y id_producto: " + ventaDetalle1.getIdProducto());
+                System.out.println("\nVenta detallada creada con idVenta : " + ventaDetalle1.getIdVenta() + " y idProducto: " + ventaDetalle1.getIdProducto());
                 System.out.println(ventaDetalle1);
             } else System.err.println("\nERROR: no se pudo crear la venta");
 
-            System.out.println("\n>>> Buscando por id_venta y id_producto");
+            System.out.println("\n>>> Buscando por idVenta y idProducto");
 
             VentaDetalle ventaDetalleEncontrada = ventaDetalleRepository.findByIdVentaAndIdProducto(ventaDetalle1.getIdVenta(), ventaDetalle1.getIdProducto());
             if(ventaDetalleEncontrada != null){
-                System.out.println("Venta detallada encontrada con id_venta: " + ventaDetalleEncontrada.getIdVenta() + " y id_producto: " + ventaDetalleEncontrada.getIdProducto());
+                System.out.println("Venta detallada encontrada con idVenta: " + ventaDetalleEncontrada.getIdVenta() + " y idProducto: " + ventaDetalleEncontrada.getIdProducto());
             } else System.err.println("ERROR: no se encontro ninguna venta detallada");
+
+            System.out.println("\n>>> Buscando por idVenta");
+
+            List<VentaDetalle> ventaDetallesEncontradas = new ArrayList<>();
+            ventaDetallesEncontradas = ventaDetalleRepository.findByIdVenta(ventaDetalle1.getIdVenta());
+            if(!ventaDetallesEncontradas.isEmpty()){
+                System.out.println("Ventas detalladas encontradas: " + ventaDetallesEncontradas.size());
+                ventaDetallesEncontradas.forEach(System.out::println);
+            } else System.err.println("ERROR: no se encontraron ventas detalladas");
+            
+            System.out.println("\n>>> Buscando por idProducto");
+
+            ventaDetallesEncontradas = ventaDetalleRepository.findByIdVenta(ventaDetalle1.getIdProducto());
+            if(!ventaDetallesEncontradas.isEmpty()){
+                System.out.println("Ventas detalladas encontradas: " + ventaDetallesEncontradas.size());
+                ventaDetallesEncontradas.forEach(System.out::println);
+            } else System.err.println("ERROR: no se encontraron ventas detalladas");
 
             System.out.println("\n>>> Actualizando venta detallada");
 
@@ -225,7 +268,7 @@ public class TestRepositories {
             ventasDetalles = ventaDetalleRepository.findAll();
             if(!ventasDetalles.isEmpty()){
                 System.out.println("ventas detalladas encontradas: " + ventasDetalles.size());
-                System.out.println(ventasDetalles);
+                ventasDetalles.forEach(System.out::println);
             } else System.err.println("ERROR: no se encontraron ventas detalladas");
 
             

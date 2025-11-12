@@ -20,11 +20,25 @@ public interface IProductoRepository {
      */
     public Producto findById(int id) throws SQLException;
     /**
+     * Busca productos con un cierto idProveedor dentro de la base de datos
+     * @param idProveedor -> idProveedor de un Producto a buscar
+     * @return -> Devuelve Productos encontrados 
+     * @throws SQLException
+     */
+    public List<Producto> findByIdProveedor(int idProveedor) throws SQLException;
+    /**
      * Llama a todos los registros de productos que haya en la base de datos
      * @return -> Devuelve una lista con todos los productos encontrados
      * @throws SQLException
      */
     public List<Producto> findAll() throws SQLException;
+    /**
+     * Busca productos por su categoria dentro de la base de datos
+     * @param categoria -> categoria de un producto a buscar
+     * @return -> Devuelve una lista con productos encontrados
+     * @throws SQLException
+     */
+    public List<Producto> findByCategoria(String categoria) throws SQLException;
     /**
      * Elimina un producto por su id dentro de la base de datos
      * @param id -> id de un Producto a eliminar

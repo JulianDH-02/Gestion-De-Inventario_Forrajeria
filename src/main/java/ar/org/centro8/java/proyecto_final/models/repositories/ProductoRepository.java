@@ -21,9 +21,12 @@ public class ProductoRepository implements IProductoRepository {
 
     private static final String SQL_CREATE = "INSERT INTO productos (nombre, precio_venta, precio_compra, stock, descripcion, categoria, id_proveedor) VALUES (?,?,?,?,?,?,?)";
     private static final String SQL_FIND_BY_ID = "SELECT * FROM productos WHERE id=?";
+    private static final String SQL_FIND_BY_ID_PROVEEDOR = "SELECT * FROM productos WHERE id_proveedor=?";
+    private static final String SQL_FIND_BY_CATEGORIA = "SELECT * FROM productos WHERE categoria LIKE ?";
     private static final String SQL_FIND_ALL = "SELECT * FROM productos";
     private static final String SQL_DELETE = "DELETE FROM productos WHERE id=?";
     private static final String SQL_UPDATE = "UPDATE productos SET nombre=?, precio_venta=?, precio_compra=?, stock=?, descripcion=?, categoria=?, id_proveedor=? WHERE id=?";
+    
 
     public ProductoRepository(DataSource dataSource){
         this.dataSource = dataSource;
@@ -58,6 +61,32 @@ public class ProductoRepository implements IProductoRepository {
                 if(rs.next()) return mapRow(rs);
             } 
         }return null;
+    }
+    @Override
+    public List<Producto> findByCategoria(String categoria) throws SQLException{
+        List<Producto> productos = new ArrayList<>();
+        try (Connection  conn= dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_CATEGORIA)) {
+            ps.setString(1,"%"+ categoria + "%");
+            try (ResultSet rs = ps.executeQuery()) { 
+                while(rs.next()){
+                    productos.add(mapRow(rs));
+                } 
+            } 
+        }return productos;
+    }
+    @Override
+    public List<Producto> findByIdProveedor(int idProveedor) throws SQLException {
+        List<Producto> productos = new ArrayList<>();
+        try (Connection  conn= dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_ID_PROVEEDOR)) {
+            ps.setInt(1, idProveedor);
+            try (ResultSet rs = ps.executeQuery()) { 
+                while(rs.next()){
+                    productos.add(mapRow(rs));
+                } 
+            } 
+        }return productos;
     }
     
     
