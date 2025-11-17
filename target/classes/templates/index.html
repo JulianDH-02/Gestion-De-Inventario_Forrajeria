@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <title>Inicio | Gestion de Inventario</title>
+</head>
+<body>
+  <div class="home-container">
+    <header class="home-header">
+      <h1>Gestión de Inventario</h1>
+      <!-- <nav>
+        <a th:href="@{/}" class="nav-link active">Inicio</a>
+        <a th:href="@{/clientes}" class="nav-link">Clientes</a>
+        <a th:href="@{/productos}" class="nav-link">Productos</a>
+        <a th:href="@{/proveedores}" class="nav-link">Proveedores</a>
+        <a th:href="@{/ventas}" class="nav-link">Ventas</a> 
+        <a th:href="@{/ventasDetalles}" class="nav-link">Ventas Detalladas</a> 
+      </nav> -->
+    </header>
+    <main class="home-main">
+      <section class="home-card">
+        <h2>Bienvenido/a al sistema</h2>
+        <p>Seleccioná una opción para comenzar:</p>
+        <div class="home-buttons">
+          <a class="button" th:href="@{/clientes}">Ver Clientes</a>
+          <a class="button" th:href="@{/productos}">Ver Productos</a>
+          <a class="button" th:href="@{/proveedores}">Ver Proveedores</a>
+          <a class="button" th:href="@{/ventas}">Ver Ventas</a>
+        </div>
+      </section>
+    </main>
+    <footer class="home-footer">
+      <p>Centro de Formación Profesional N°8 SMATA · Desarrollado en Java + Spring Boot + Thymeleaf</p>
+    </footer>
+  </div>
+</body>
+</html>

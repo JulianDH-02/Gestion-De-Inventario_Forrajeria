@@ -44,7 +44,7 @@ CREATE TABLE ventas (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     id_cliente INT NOT NULL,
     precio_total_venta INT NOT NULL,
-    fecha_venta DATETIME NOT NULL,
+    fecha_venta DATE NOT NULL,
     CONSTRAINT fk_ventas_clientes
     FOREIGN KEY (id_cliente)
     REFERENCES clientes(id)

@@ -47,7 +47,7 @@ public interface IVentaDetalleRepository {
      * @return -> Devuelve 1 si hubo cambios, si no 0
      * @throws SQLException
      */
-    public int delete(int idVenta, int idProducto) throws SQLException;
+    public int delete(int idVenta) throws SQLException;
      /**
      * Actualiza una venta detallada por su id dentro de la base de datos
      * @param ventaDetalle -> objeto de VentaDetalle que se va actualizar

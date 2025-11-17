@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Alta de venta</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+
+    <h1>Alta de Nuevo Venta</h1>
+
+    <p><a th:href="@{/ventas}" class="button back">Volver al Listado de Ventas</a></p>
+
+    <p th:if="${error}" class="error-message" th:text="${error}"></p>
+
+    <!-- FORM PRINCIPAL -->
+    <form th:action="@{/ventas/guardar}" th:object="${venta}" method="post" style="flex-direction: column; gap: 20px;">
+
+        <!-- ID CLIENTE -->
+        <div class="form-group">
+            <label for="idCliente">Cliente:</label>
+            <select id="idCliente" name="idCliente" required style="width: 100%;">
+                <option value="">Seleccione un cliente</option>
+                <option th:each="cliente : ${clientes}"
+                        th:value="${cliente.id}"
+                        th:text="'(' + ${cliente.id} + ') ' + ${cliente.nombre} + ' ' + ${cliente.apellido}">
+                </option>
+            </select>
+        </div>
+
+        <!-- FECHA -->
+        <div class="form-group">
+            <label for="fechaVenta">Fecha Venta:</label>
+            <input type="date" id="fechaVenta"
+                   th:value="${#temporals.format(venta.fechaVenta, 'yyyy-MM-dd')}"
+                   th:field="*{fechaVenta}" required>
+        </div>
+
+        <hr>
+
+        <!-- DETALLES DE LA VENTA -->
+        <h3>Detalles de la Venta</h3>
+        <p>Puedes agregar varias líneas de producto.</p>
+
+        <table class="detalles">
+            <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <!-- 3 filas por defecto -->
+            <tr th:each="i : ${#numbers.sequence(1,3)}">
+
+                <!-- SELECT DE PRODUCTOS -->
+                <td>
+                    <select name="idProducto" style="width: 100%;">
+                        <option value="">-- Seleccione --</option>
+                        <option th:each="p : ${productos}"
+                                th:value="${p.id}"
+                                th:text="${p.nombre}">
+                        </option>
+                    </select>
+                </td>
+
+                <!-- CANTIDAD -->
+                <td>
+                    <input type="number" name="cantidad" min="1" value="1" style="width: 100%;">
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        <button type="submit" class="button">Guardar Venta</button>
+    </form>
+
+</div>
+</body>
+</html>

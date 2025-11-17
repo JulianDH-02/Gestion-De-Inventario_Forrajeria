@@ -26,7 +26,7 @@ public class ProductoService {
      * @return -> El objeto Producto guardado 
      * @throws SQLException
      */
-    public Producto guardarproducto(Producto producto) throws SQLException{
+    public Producto guardarProducto(Producto producto) throws SQLException{
         if(producto.getId()!=0){
             productoRepository.update(producto);
             return producto;
@@ -50,7 +50,7 @@ public class ProductoService {
      * @return -> lista de objetos de la clase Producto
      * @throws SQLException
      */
-    public List<Producto> buscarProductoPorIdProveedor(int idProveedor) throws SQLException{
+    public List<Producto> buscarProductosPorIdProveedor(int idProveedor) throws SQLException{
         return productoRepository.findByIdProveedor(idProveedor);
     }
     /**

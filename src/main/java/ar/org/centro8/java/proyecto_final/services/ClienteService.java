@@ -46,6 +46,9 @@ public class ClienteService {
     public Cliente buscarClientePorId(int id) throws SQLException{
         return clienteRepository.findById(id);
     }
+    public List<Cliente> buscarClientePorNombre(String nombre) throws SQLException{
+        return clienteRepository.findByNombre(nombre);
+    }
     /**
      * Elimina un cliente mediante su id
      * @param id -> id de objeto Cliente a eliminar
@@ -55,4 +58,5 @@ public class ClienteService {
     public int eliminarCliente(int id) throws SQLException{
         return clienteRepository.delete(id);
     }
+
 }

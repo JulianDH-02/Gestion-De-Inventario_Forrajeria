@@ -1,0 +1,350 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+body {
+    background: #f4f4f9;
+    color: #333;
+}
+
+.home-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.home-header {
+    background: #2b3a55;
+    color: white;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-header h1 {
+    font-size: 26px;
+}
+
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+.nav-link {
+    color: #dbe4ff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    transition: 0.3s ease;
+    border-radius: 6px;
+}
+
+.nav-link:hover {
+    background: #52658f;
+    color: #fff;
+}
+
+.nav-link.active {
+    background: #637aa5;
+    color: white;
+}
+
+/* ======== MAIN ======== */
+.home-main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.home-card {
+    background: white;
+    padding: 40px;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.home-card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.home-card p {
+    margin-bottom: 30px;
+    color: #555;
+}
+
+/* ======== BUTTONS ======== */
+.home-buttons {
+    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+@media (max-width: 768px) {
+    .home-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 10px;
+    }
+}
+
+.button {
+    display: inline-block;
+    background: #2b3a55;
+    color: white;
+    padding: 12px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-weight: bold;
+    justify-content: center;
+    text-align: center;
+}
+
+.button:hover {
+    background: #52658f;
+}
+
+.home-footer {
+    background: #2b3a55;
+    color: #dbe4ff;
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+    margin-top: auto;
+}
+
+.home-footer p {
+    opacity: 0.75;
+}
+.container {
+    background: white;
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #2b3a55;
+}
+
+/* --- FORMULARIO DE BÚSQUEDA --- */
+
+form {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    flex: 1;
+}
+
+input[type="text"]:focus {
+    border-color: #2b3a55;
+    outline: none;
+}
+
+/* Botón del formulario */
+form button {
+    background: #2b3a55;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: #52658f;
+}
+
+/* --- MENSAJE DE ERROR --- */
+
+.error-message {
+    margin-top: 15px;
+    padding: 10px;
+    background: #ffdddd;
+    border-left: 4px solid #cc0000;
+    color: #a80000;
+    border-radius: 6px;
+}
+
+/* --- TABLA --- */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 25px;
+}
+
+thead {
+    background: #2b3a55;
+    color: white;
+}
+
+thead th {
+    padding: 12px;
+    font-size: 15px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #ccc;
+}
+
+tbody td {
+    padding: 10px;
+}
+
+/* Hover en las filas */
+tbody tr:hover {
+    background: #eef1f9;
+}
+
+/* --- BOTONES PRINCIPALES (los <a class="button">) --- */
+
+.button {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #2b3a55;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.button:hover {
+    background: #52658f;
+}
+
+/* --- RESPONSIVE --- */
+
+@media (max-width: 600px) {
+    form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    thead th, tbody td {
+        padding: 8px;
+    }
+}
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    transition: border 0.2s;
+}
+
+input:focus {
+    border-color: #0077cc;
+    outline: none;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.button.edit{
+    background: green;
+}
+.button.edit:hover{
+    background: #36BF26;
+}
+.button.delete{
+    background: red;
+}
+.button.delete:hover{
+    background: #BD2222;
+}
+.button.back {
+    background-color: #6c757d;
+}
+
+.button.back:hover {
+    background-color: #5a6268;
+}
+
+form select {
+    width: calc(100% - 22px); /* Ajuste para padding y border */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Incluir padding y border en el ancho */
+    width: 160px;
+    height: 45px;
+}
+form label {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+}
+.venta-container {
+    max-width: 500px;
+    margin: 30px auto;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    font-family: "Segoe UI", sans-serif;
+}
+
+.venta-container h2 {
+    text-align: center;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.venta-container p {
+    font-size: 1rem;
+    margin: 12px 0;
+    color: #555;
+}
+
+.venta-container strong {
+    display: inline-block;
+    width: 120px;
+    color: #222;
+}
+
+.venta-container span {
+    font-weight: normal;
+    color: #444;
+}

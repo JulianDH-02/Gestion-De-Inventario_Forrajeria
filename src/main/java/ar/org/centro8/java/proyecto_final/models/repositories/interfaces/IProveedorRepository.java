@@ -31,6 +31,7 @@ public interface IProveedorRepository {
      * @return -> Devuelve 1 si hubo cambios, si no 0
      * @throws SQLException
      */
+    public List<Proveedor> findByName(String nombre) throws SQLException;
     public int delete(int id) throws SQLException;
     /**
      * Actualiza un proveedor por su id dentro de la base de datos

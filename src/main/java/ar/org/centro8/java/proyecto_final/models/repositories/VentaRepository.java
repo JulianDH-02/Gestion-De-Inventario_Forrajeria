@@ -33,17 +33,17 @@ public class VentaRepository implements IVentaRepository {
     }
 
     @Override
-    public void create(Venta cliente) throws SQLException {
+    public void create(Venta venta) throws SQLException {
         try (Connection conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(SQL_CREATE, Statement.RETURN_GENERATED_KEYS) ) {
-            ps.setInt(1, cliente.getIdCliente());
-            ps.setInt(2, cliente.getPrecioTotalVenta());
-            ps.setDate(3, Date.valueOf(cliente.getFechaVenta()));
+            ps.setInt(1, venta.getIdCliente());
+            ps.setInt(2, venta.getPrecioTotalVenta());
+            ps.setDate(3, Date.valueOf(venta.getFechaVenta()));
             ps.executeUpdate();
 
             try(ResultSet keys = ps.getGeneratedKeys()){
                 if(keys.next()){
-                    cliente.setId(keys.getInt(1));
+                    venta.setId(keys.getInt(1));
                 }
             }
         }
@@ -97,13 +97,13 @@ public class VentaRepository implements IVentaRepository {
     
 
     @Override
-    public int update(Venta cliente) throws SQLException {
+    public int update(Venta venta) throws SQLException {
         try (Connection conn = dataSource.getConnection();
         PreparedStatement ps = conn.prepareStatement(SQL_UPDATE)) {
-            ps.setInt(1, cliente.getIdCliente());
-            ps.setInt(2, cliente.getPrecioTotalVenta());
-            ps.setDate(3, Date.valueOf(cliente.getFechaVenta()));
-            ps.setInt(4, cliente.getId());
+            ps.setInt(1, venta.getIdCliente());
+            ps.setInt(2, venta.getPrecioTotalVenta());
+            ps.setDate(3, Date.valueOf(venta.getFechaVenta()));
+            ps.setInt(4, venta.getId());
             int filaAfectadas = ps.executeUpdate(); 
             return filaAfectadas; 
     }

@@ -1,0 +1,65 @@
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de productos</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Listado de productos</h1>
+
+        <p><a th:href="@{/}" class="button">Inicio</a></p>
+
+        <form th:action="@{/productos/buscarPorProveedor}" method="get">
+            <label for="nombre">Filtrar por Proveedor:</label>
+            <select id="idProveedor" name="idProveedor">
+                <option value="0" th:selected="${selectedProveedorId == null or selectedProveedorId == 0}">Todos los
+                    proveedores</option>
+                <option th:each="proveedor : ${proveedores}" th:value="${proveedor.id}" th:text="${proveedor.nombre}"
+                    th:selected="${selectedproveedorId != null and proveedor.id == selectedproveedorId}">
+                </option>
+            </select>
+            <button type="submit">Buscar</button>
+        </form>
+
+        <p><a th:href="@{/productos/alta}" class="button">Nuevo producto</a></p>
+        <p th:if="${error}" class="error-message" th:text="${error}"></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Precio Venta</th>
+                    <th>Precio Compra</th>
+                    <th>Stock</th>
+                    <th>Descripcion</th>
+                    <th>Categoria</th>
+                    <th>Proveedor</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.id}"></td>
+                    <td th:text="${producto.nombre}"></td>
+                    <td th:text="${producto.precioVenta}"></td>
+                    <td th:text="${producto.precioCompra}"></td>
+                    <td th:text="${producto.stock}"></td>
+                    <td th:text="${producto.descripcion != null and !#strings.isEmpty(producto.descripcion) ? producto.descripcion : 'null'}"></td>
+                    <td th:text="${producto.categoria}"></td>
+                    <td th:text="${producto.idProveedor}"></td>
+
+                    <td>
+                        <a th:href="@{/productos/editar(id=${producto.id})}" class="button edit">Editar</a>
+                        <a th:href="@{/productos/eliminar(id=${producto.id})}" class="button delete" onclick="return confirm('¿Estás seguro de que quieres eliminar este producto?');">Eliminar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+
+</html>

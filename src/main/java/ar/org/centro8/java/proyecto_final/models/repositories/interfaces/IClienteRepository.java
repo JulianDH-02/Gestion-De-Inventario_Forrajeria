@@ -22,6 +22,13 @@ public interface IClienteRepository {
      */
     public Cliente findById(int id) throws SQLException;
     /**
+     * Busca clientes que tengan un cierto nombre dentro de la base de datos
+     * @param nombre -> nombre de un Cliente a buscar
+     * @return -> Devuelve lista de objetos Cliente encontrados 
+     * @throws SQLException
+     */
+    public List<Cliente> findByNombre(String nombre) throws SQLException;
+    /**
      * Llama a todos los registros de clientes que haya en la base de datos
      * @return -> Devuelve una lista con todos los clientes encontrados
      * @throws SQLException

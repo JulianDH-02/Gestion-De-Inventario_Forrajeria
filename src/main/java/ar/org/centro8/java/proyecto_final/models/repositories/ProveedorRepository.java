@@ -22,6 +22,7 @@ public class ProveedorRepository implements IProveedorRepository {
 
     private static final String SQL_CREATE = "INSERT INTO proveedores (nombre, telefono, email, observaciones) VALUES (?,?,?,?)";
     private static final String SQL_FIND_BY_ID = "SELECT * FROM proveedores WHERE id=?";
+    private static final String SQL_FIND_BY_NAME = "SELECT * FROM proveedores WHERE nombre LIKE ?";
     private static final String SQL_FIND_ALL = "SELECT * FROM proveedores";
     private static final String SQL_DELETE = "DELETE FROM proveedores WHERE id=?";
     private static final String SQL_UPDATE = "UPDATE proveedores SET nombre=?, telefono=?, email=?, observaciones=? WHERE id=?";
@@ -57,7 +58,17 @@ public class ProveedorRepository implements IProveedorRepository {
             } 
         }return null;
     }
-    
+    @Override
+    public List<Proveedor> findByName(String nombre) throws SQLException{
+        List<Proveedor> proveedores = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_NAME);){
+                ps.setString(1,"%" + nombre + "%");
+                try(ResultSet rs = ps.executeQuery()){
+                    while(rs.next()) proveedores.add(mapRow(rs));
+            }
+        }return proveedores;
+    }
     
 
     @Override

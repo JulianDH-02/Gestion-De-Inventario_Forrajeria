@@ -30,10 +30,10 @@ public class ProveedorService {
      */
     public Proveedor guardarProveedor(Proveedor proveedor) throws SQLException{
         if(proveedor.getId() != 0){
-            proveedorRepository.create(proveedor);
+            proveedorRepository.update(proveedor);
             return proveedor;
         } else {
-            proveedorRepository.update(proveedor);
+            proveedorRepository.create(proveedor);
             return proveedor;
         }
     }
@@ -43,16 +43,19 @@ public class ProveedorService {
      * @return -> el objeto Proveedor encontrado
      * @throws SQLException
      */
-    public Proveedor buscarPorId(int id) throws SQLException{
+    public Proveedor buscarProveedorPorId(int id) throws SQLException{
         return proveedorRepository.findById(id);
     }
+    public List<Proveedor> buscarProveedorPorNombre(String nombre) throws SQLException{
+        return proveedorRepository.findByName(nombre);
+    }
     /**
-     * Elimina un producto mediante su id
-     * @param id -> id de objeto Producto a eliminar
+     * Elimina un proveedor mediante su id
+     * @param id -> id de objeto Proveedor a eliminar
      * @return -> Devuelve 1 si se elimino, si no 0
      * @throws SQLException
      */
-    public int eliminarProducto(int id) throws SQLException{
+    public int eliminarProveedor(int id) throws SQLException{
         return proveedorRepository.delete(id);
     }
 }

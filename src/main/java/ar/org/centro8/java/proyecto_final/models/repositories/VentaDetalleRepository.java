@@ -24,7 +24,7 @@ public class VentaDetalleRepository implements IVentaDetalleRepository {
     private static final String SQL_FIND_BY_ID_VENTA = "SELECT * FROM ventas_detalle WHERE id_venta=?";
     private static final String SQL_FIND_BY_ID_PRODUCTO = "SELECT * FROM ventas_detalle WHERE id_producto=?";
     private static final String SQL_FIND_ALL = "SELECT * FROM ventas_detalle";
-    private static final String SQL_DELETE = "DELETE FROM ventas_detalle WHERE id_venta=? AND id_producto=?";
+    private static final String SQL_DELETE = "DELETE FROM ventas_detalle WHERE id_venta=?";
     private static final String SQL_UPDATE = "UPDATE ventas_detalle SET cantidad=?,precio_total=? WHERE id_venta=? AND id_producto=?";
 
     public VentaDetalleRepository(DataSource dataSource){
@@ -61,7 +61,7 @@ public class VentaDetalleRepository implements IVentaDetalleRepository {
             PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_ID_VENTA)) {
             ps.setInt(1, idVenta);
             try (ResultSet rs = ps.executeQuery()) { 
-                if(rs.next()) {
+                while(rs.next()) {
                     ventasDetalles.add(mapRow(rs));
                 }
             } 
@@ -96,11 +96,10 @@ public class VentaDetalleRepository implements IVentaDetalleRepository {
     
 
     @Override
-    public int delete(int idVenta, int idProducto) throws SQLException {
+    public int delete(int idVenta) throws SQLException {
         try (Connection conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(SQL_DELETE)) {
             ps.setInt(1, idVenta);
-            ps.setInt(2, idProducto);
             int filaAfectada = ps.executeUpdate();            
             return filaAfectada;
         } 

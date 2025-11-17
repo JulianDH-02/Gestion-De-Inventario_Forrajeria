@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Alta de Cliente</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <h1>Alta de Nuevo Cliente</h1>
+        <p><a th:href="@{/clientes}" class="button back">Volver al Listado de Clientes</a></p>
+
+        <p th:if="${error}" class="error-message" th:text="${error}"></p>
+
+        <form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post">
+            <!-- rh:object es el objeto llamado alumno que viene del controlador.Todos los campos con th:field="*{...}" se entienden como propiedades de ese objeto alumno. -->
+            <div>
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" th:field="*{nombre}" required>
+                <!-- el atributo id sirve como identificador único de cada elemento en la página. -->
+                <!-- th:field es una forma abreviada que usa Thymeleaf para vincular automáticamente un campo HTML con un atributo de un objeto del modelo. -->
+            </div>
+            <div>
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" th:field="*{apellido}" required>
+            </div>
+            <div>
+                <label for="dni">DNI:</label>
+                <input type="number" id="dni" th:field="*{dni}" required>
+            </div>
+            <div>
+                <label for="domicilio">Domicilio:</label>
+                <input type="text" id="Domicilio" th:field="*{domicilio}">
+            </div>
+            <div>
+                <label for="telefono">telefono:</label>
+                <input type="text" id="telefono" th:field="*{telefono}">
+            </div>
+            <button type="submit" class="button">Guardar Cliente</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -20,12 +20,12 @@ public interface IVentaRepository {
      */
     public Venta findById(int id) throws SQLException;
     /**
-     * Busca una venta por su idCliente dentro de la base de datos
-     * @param idCliente -> id de un cliente de una Venta a buscar
+     * Busca una venta por su idVenta dentro de la base de datos
+     * @param idVenta -> id de un Venta de una Venta a buscar
      * @return -> Devuelve una lista de Ventas encontrada
      * @throws SQLException
      */
-    public List<Venta> findByIdCliente(int idCliente) throws SQLException;
+    public List<Venta> findByIdCliente(int idV) throws SQLException;
     /**
      * Llama a todos los registros de ventas que haya en la base de datos
      * @return -> Devuelve una lista con todos las ventas encontradas

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles de Venta</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+
+    <h1>Detalles de Venta</h1>
+
+    <p>
+        <a th:href="@{/ventas}" class="button back">Volver a Ventas</a>
+    </p>
+
+    <!-- Info de la venta solo si se entró con ID -->
+    <div th:if="${venta != null}" class="venta-container">
+        <h2>Venta ID: <span th:text="${venta.id}"></span></h2>
+        <p><strong>Cliente:</strong> <span th:text="${venta.idCliente}"></span></p>
+        <p><strong>Fecha:</strong> <span th:text="${venta.fechaVenta}"></span></p>
+        <p><strong>Total:</strong> <span th:text="${venta.precioTotalVenta}"></span></p>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID Producto</th>
+            <th>Nombre Producto</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="detalle : ${detalles}">
+            <td th:text="${detalle.idProducto}"></td>
+            <td th:text="${productosMap[detalle.idProducto]}"></td>
+            <td th:text="${detalle.cantidad}"></td>
+            <td th:text="${detalle.precioTotal}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

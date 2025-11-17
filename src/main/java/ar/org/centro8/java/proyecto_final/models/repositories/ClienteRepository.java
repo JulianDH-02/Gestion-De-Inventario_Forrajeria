@@ -21,6 +21,7 @@ public class ClienteRepository implements IClienteRepository {
 
     private static final String SQL_CREATE = "INSERT INTO clientes (nombre, apellido, dni, domicilio, telefono) VALUES (?,?,?,?,?)";
     private static final String SQL_FIND_BY_ID = "SELECT * FROM clientes WHERE id=?";
+    private static final String SQL_FIND_BY_NOMBRE = "SELECT * FROM clientes WHERE nombre LIKE ?";
     private static final String SQL_FIND_ALL = "SELECT * FROM clientes";
     private static final String SQL_DELETE = "DELETE FROM clientes WHERE id=?";
     private static final String SQL_UPDATE = "UPDATE clientes SET nombre=?, apellido=?, dni=?, domicilio=?, telefono=? WHERE id=?";
@@ -49,7 +50,7 @@ public class ClienteRepository implements IClienteRepository {
 
     @Override
     public Cliente findById(int id) throws SQLException {
-        try (Connection  conn= dataSource.getConnection();
+        try (Connection conn = dataSource.getConnection();
             PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_ID)) {
             ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) { 
@@ -57,6 +58,21 @@ public class ClienteRepository implements IClienteRepository {
             } 
         }return null;
     }
+
+    @Override
+    public List<Cliente> findByNombre(String nombre) throws SQLException{
+        List<Cliente> clientes = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SQL_FIND_BY_NOMBRE)){
+            ps.setString(1, "%"+nombre+"%");
+            try (ResultSet rs = ps.executeQuery()) {
+                while(rs.next()){
+                    clientes.add(mapRow(rs));
+                }
+            }
+        }return clientes;
+    }
+
     
     
 
